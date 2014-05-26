@@ -1,4 +1,7 @@
-﻿namespace HomeDayReports.Repository
+﻿using System.Data.Entity;
+using HomeDayReports.Model;
+
+namespace HomeDayReports.Repository
 {
     public class DBContext : DbContext
     {
