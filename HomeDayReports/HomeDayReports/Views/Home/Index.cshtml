@@ -5,6 +5,32 @@
 <p>
     <span class="text-warning">Создать отчёт за</span> 
     @ViewBag.Message 
-    <button class="btn btn-mini btn-primary yes-button" type="button">Да!</button>
+    <button id="addDayReportButtonId" class="btn btn-mini btn-primary yes-button" type="button">Да!</button>
 </p>
 
+<script>
+    function addReport() {
+        var addReportUrl = "/Home/Index/AddReport";
+        var formData = { dateNow: "26" };
+        $.ajax({
+            type: "POST",
+            url: addReportUrl,
+            data: formData,
+            success: function (data, textStatus, jqXHR) {
+                //data - response from server
+                alert("success");
+                alert(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("error");
+                alert(errorThrown);
+            }
+        });
+        
+    }
+    $(document).ready(function () {
+        $("#addDayReportButtonId").click(function() {
+            addReport();
+        });
+    });
+</script>

@@ -15,6 +15,13 @@ namespace HomeDayReports.Controllers
             return View();
         }
 
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult AddReport(string dateNow)
+        {
+            DateTime date = DateTime.Parse(dateNow);
+            return null;
+        }
+
         public ActionResult About()
         {
             return View();
