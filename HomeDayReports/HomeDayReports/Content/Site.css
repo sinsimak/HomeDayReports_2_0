@@ -322,3 +322,7 @@ div#title {
 .tri-state {
     width: 6em;
 }
+/*------------------ custom scc clases --------------------------*/
+.yes-button {
+    width: 5em !important;
+}

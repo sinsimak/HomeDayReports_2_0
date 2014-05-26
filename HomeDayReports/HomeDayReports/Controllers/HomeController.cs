@@ -10,7 +10,7 @@ namespace HomeDayReports.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
+            ViewBag.Message = DateTime.Now.ToShortDateString();
 
             return View();
         }
