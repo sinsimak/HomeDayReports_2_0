@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeDayReports", "HomeDayReports\HomeDayReports.csproj", "{76FFB11B-C913-4628-B4AE-15FFB79E558C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeDayReports.Model", "HomeDayReports.Model\HomeDayReports.Model.csproj", "{4CE0DA55-D5F9-4CA2-9B67-62D406A6231B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeDayReports.Repository", "HomeDayReports.Repository\HomeDayReports.Repository.csproj", "{31043F37-D820-4393-946F-69DAAFFC026D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{76FFB11B-C913-4628-B4AE-15FFB79E558C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76FFB11B-C913-4628-B4AE-15FFB79E558C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76FFB11B-C913-4628-B4AE-15FFB79E558C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CE0DA55-D5F9-4CA2-9B67-62D406A6231B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CE0DA55-D5F9-4CA2-9B67-62D406A6231B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CE0DA55-D5F9-4CA2-9B67-62D406A6231B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CE0DA55-D5F9-4CA2-9B67-62D406A6231B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31043F37-D820-4393-946F-69DAAFFC026D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31043F37-D820-4393-946F-69DAAFFC026D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31043F37-D820-4393-946F-69DAAFFC026D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31043F37-D820-4393-946F-69DAAFFC026D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
