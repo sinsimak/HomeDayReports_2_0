@@ -10,19 +10,18 @@
 
 <script>
     function addReport() {
-        var addReportUrl = "/Home/Index/AddReport";
-        var formData = { dateNow: "26" };
+        var addReportUrl = "/Home/AddReport";
+        var today = JSON.stringify(new Date());
+        var formData = { dateTimeNow: today };
         $.ajax({
             type: "POST",
             url: addReportUrl,
             data: formData,
             success: function (data, textStatus, jqXHR) {
                 //data - response from server
-                alert("success");
                 alert(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert("error");
                 alert(errorThrown);
             }
         });

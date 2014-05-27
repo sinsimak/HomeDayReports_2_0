@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 
 namespace HomeDayReports.Controllers
 {
@@ -16,9 +17,10 @@ namespace HomeDayReports.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public JsonResult AddReport(string dateNow)
+        public JsonResult AddReport(string dateTimeNow)
         {
-            DateTime date = DateTime.Parse(dateNow);
+            DateTime dateTime = JsonConvert.DeserializeObject<DateTime>(dateTimeNow);
+
             return null;
         }
 
