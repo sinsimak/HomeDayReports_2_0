@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HomeDayReports.Model;
+using HomeDayReports.Repository;
 using Newtonsoft.Json;
 
 namespace HomeDayReports.Controllers
@@ -19,9 +22,28 @@ namespace HomeDayReports.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public JsonResult AddReport(string dateTimeNow)
         {
-            DateTime dateTime = JsonConvert.DeserializeObject<DateTime>(dateTimeNow);
+            DateTime reportDate = JsonConvert.DeserializeObject<DateTime>(dateTimeNow);
 
-            return null;
+            List<DayReport> reports = new List<DayReport>();
+
+            using (var db = new DBContext())
+            {
+
+                if (dateTimeNow != null)
+                {
+                    DayReport report = new DayReport()
+                    {
+                        ReportDate = reportDate
+                    };
+                    db.DayReports.Add(report);
+                    db.SaveChanges();
+                }
+                //reports = db.DayReports.ToList();
+                reports = db.DayReports.OrderBy(r => r.ReportDate).ToList();
+
+                string jsonString = JsonConvert.SerializeObject(reports);
+                return Json(jsonString);
+            }
         }
 
         public ActionResult About()

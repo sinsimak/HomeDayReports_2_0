@@ -7,19 +7,26 @@
     @ViewBag.Message 
     <button id="addDayReportButtonId" class="btn btn-mini btn-primary yes-button" type="button">Да!</button>
 </p>
+<ul id="reports_list"></ul>
 
 <script>
+    function showReports(data) {
+        var reports = JSON.parse(data);
+        $("#reports_list").text("");
+        $.each(reports, function(i) {
+            $("#reports_list").append("<li>" + reports[i].ReportDate + "</li>");
+        });
+    }
     function addReport() {
         var addReportUrl = "/Home/AddReport";
         var today = JSON.stringify(new Date());
-        var formData = { dateTimeNow: today };
+        
         $.ajax({
             type: "POST",
             url: addReportUrl,
-            data: formData,
+            data: { dateTimeNow: today },
             success: function (data, textStatus, jqXHR) {
-                //data - response from server
-                alert(data);
+                showReports(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
