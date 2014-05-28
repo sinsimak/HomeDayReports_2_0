@@ -72,9 +72,26 @@
         });
         
     }
+    
+    function getReports() {
+        var getReportsUrl = "Home/GetReports";
+
+        $.ajax({
+            type: "POST",
+            url: getReportsUrl,
+            data: {},
+            success: function (data, textStatus, jqXHR) {
+                showReports(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
 
     
     $(document).ready(function () {
+        getReports();
         $("#addDayReportButtonId").click(function() {
             addReport();
         });
