@@ -10,13 +10,23 @@
 <ul id="reports_list"></ul>
 
 <script>
+    function getGoodFormatDate(date) {
+        var currentDateTime = new Date(date);
+        var year = currentDateTime.getFullYear();
+        var month = currentDateTime.getMonth();
+        var currentDate = currentDateTime.getDate();
+        
+        return currentDate + "." + month + "." + year;
+    }
+    
     function showReports(data) {
         var reports = JSON.parse(data);
         $("#reports_list").text("");
         $.each(reports, function(i) {
-            $("#reports_list").append("<li>" + reports[i].ReportDate + "</li>");
+            $("#reports_list").append("<li>" + getGoodFormatDate(reports[i].ReportDate) + "</li>");
         });
     }
+    
     function addReport() {
         var addReportUrl = "/Home/AddReport";
         var today = JSON.stringify(new Date());
@@ -34,6 +44,7 @@
         });
         
     }
+    
     $(document).ready(function () {
         $("#addDayReportButtonId").click(function() {
             addReport();
