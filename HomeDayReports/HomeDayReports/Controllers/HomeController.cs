@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HomeDayReports.Model;
+using HomeDayReports.Models.Dtos;
 using HomeDayReports.Repository;
 using Newtonsoft.Json;
 
@@ -24,7 +25,7 @@ namespace HomeDayReports.Controllers
         {
             DateTime reportDate = JsonConvert.DeserializeObject<DateTime>(dateTimeNow);
 
-            List<DayReport> reports = new List<DayReport>();
+            //List<DayReport> reports = new List<DayReport>();
 
             using (var db = new DBContext())
             {
@@ -39,7 +40,18 @@ namespace HomeDayReports.Controllers
                     db.SaveChanges();
                 }
                 //reports = db.DayReports.ToList();
-                reports = db.DayReports.OrderBy(r => r.ReportDate).ToList();
+                var reports = db.DayReports
+                            .OrderBy(r => r.ReportDate)
+                            .Select(r => new DayReportAjaxDto
+                                { 
+                                    DayReport = r,
+                                    BusinesIdeasCount = r.BusinesIdeas.Count,
+                                    DoneTasksCount = r.DoneTasks.Count,
+                                    EventsCount = r.Events.Count,
+                                    ExpensesCount = r.Expenses.Count,
+                                    IdeasCount = r.Ideas.Count
+                                })
+                            .ToList();
 
                 string jsonString = JsonConvert.SerializeObject(reports);
                 return Json(jsonString);

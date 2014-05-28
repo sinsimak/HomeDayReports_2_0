@@ -7,9 +7,15 @@
     @ViewBag.Message 
     <button id="addDayReportButtonId" class="btn btn-mini btn-primary yes-button" type="button">Да!</button>
 </p>
-<ul id="reports_list"></ul>
+<div id="reports_list"></div>
 
 <script>
+    function showItemReport(item) {
+        if (item == null || item == "[ ]") {
+            return 0;
+        }
+
+    }
     function getGoodFormatDate(date) {
         var currentDateTime = new Date(date);
         var year = currentDateTime.getFullYear();
@@ -23,7 +29,29 @@
         var reports = JSON.parse(data);
         $("#reports_list").text("");
         $.each(reports, function(i) {
-            $("#reports_list").append("<li>" + getGoodFormatDate(reports[i].ReportDate) + "</li>");
+            $("#reports_list").append(
+                "<table class='table table-striped'>" +
+                    "<tr>" +
+                        "<th>" + "Отчёт за: " + getGoodFormatDate(reports[i].DayReport.ReportDate) + "</th>" +
+                    "</tr>" +
+                    "<tr>" +
+                        "<td>" + "Анализ событий дня: " + reports[i].EventsCount + "</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                        "<td>" + "Ключевый мысли дня: " + reports[i].IdeasCount + "</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                        "<td>" + "Решённые задачи: " + reports[i].DoneTasksCount + "</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                        "<td>" + "Бизнес идеи: " + reports[i].BusinesIdeasCount + "</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                        "<td>" + "Расходы за день: " + reports[i].ExpensesCount + "</td>" +
+                    "</tr>" +
+
+                "</table>"
+            );
         });
     }
     
@@ -44,6 +72,7 @@
         });
         
     }
+
     
     $(document).ready(function () {
         $("#addDayReportButtonId").click(function() {
