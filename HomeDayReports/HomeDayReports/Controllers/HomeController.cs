@@ -64,7 +64,7 @@ namespace HomeDayReports.Controllers
             using (var db = new DBContext())
             {
 
-                var reports = db.DayReports
+                var tempReports = db.DayReports
                             .OrderBy(r => r.ReportDate)
                             .Select(r => new DayReportAjaxDto
                             {
@@ -76,7 +76,8 @@ namespace HomeDayReports.Controllers
                                 IdeasCount = r.Ideas.Count
                             })
                             .ToList();
-
+                DayReportsAjaxDto reports = new DayReportsAjaxDto();
+                reports.Reports = tempReports;
                 string jsonString = JsonConvert.SerializeObject(reports);
                 return Json(jsonString);
             }

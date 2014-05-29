@@ -2,20 +2,59 @@
     ViewBag.Title = "Home Page";
 }
 
-<p>
+<p id="yes_button">
     <span class="text-warning">Создать отчёт за</span> 
     @ViewBag.Message 
     <button id="addDayReportButtonId" class="btn btn-mini btn-primary yes-button">Да!</button>
 </p>
 <div id="reports_list"></div>
 
-<script>
-    function showItemReport(item) {
-        if (item == null || item == "[ ]") {
-            return 0;
-        }
+<script type="text/template" class="template">
+    <% _.each( rc.Reports, function(report) { %>
+        <table class='table table-striped'>
+            <tr>
+                <th>Отчёт за: <%= getGoodFormatDate(report.DayReport.ReportDate) %></th>
+            </tr>
+            <tr>
+                <td>
+                    Анализ событий дня: <%= report.EventsCount %> 
+                    <button id="addDayReportButtonId" class="btn btn-mini btn-primary yes-button">Да!</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Ключевый мысли дня: <%= report.IdeasCount %>
+                    @Html.ActionLink("кнопка", "Index", "Home")
+                </td>
+            </tr>
+            <tr>
+                <td>Решённые задачи: <%= report.DoneTasksCount %></td>
+            </tr>
+            <tr>
+                <td>Бизнес идеи: <%= report.BusinesIdeasCount %></td>
+            </tr>
+            <tr>
+                <td>Расходы за день: <%= report.ExpensesCount %></td>
+            </tr>
+        </table>
+    <% }); %>
+</script>
 
+<script>
+    function showReportWithUnderscoreJS(data) {
+        var templateData = JSON.parse(data);
+        _.templateSettings.variable = "rc";
+
+        var template = _.template(
+            $("script.template").html()
+        );
+
+        $("#yes_button").after(
+            template(templateData)
+        );
     }
+
+
     function getGoodFormatDate(date) {
         var currentDateTime = new Date(date);
         var year = currentDateTime.getFullYear();
@@ -28,29 +67,29 @@
     function showReports(data) {
         var reports = JSON.parse(data);
         $("#reports_list").text("");
-        $.each(reports, function(i) {
+        $.each(reports.Reports, function (i) {
             $("#reports_list").append(
                 "<table class='table table-striped'>" +
                     "<tr>" +
-                        "<th>" + "Отчёт за: " + getGoodFormatDate(reports[i].DayReport.ReportDate) + "</th>" +
+                    "<th>" + "Отчёт за: " + getGoodFormatDate(reports.Reports[i].DayReport.ReportDate) + "</th>" +
                     "</tr>" +
                     "<tr>" +
-                        "<td>" + "Анализ событий дня: " + reports[i].EventsCount + "</td>" +
+                    "<td>" + "Анализ событий дня: " + reports.Reports[i].EventsCount + "</td>" +
                     "</tr>" +
                     "<tr>" +
-                        "<td>" + "Ключевый мысли дня: " + reports[i].IdeasCount + "</td>" +
+                    "<td>" + "Ключевый мысли дня: " + reports.Reports[i].IdeasCount + "</td>" +
                     "</tr>" +
                     "<tr>" +
-                        "<td>" + "Решённые задачи: " + reports[i].DoneTasksCount + "</td>" +
+                    "<td>" + "Решённые задачи: " + reports.Reports[i].DoneTasksCount + "</td>" +
                     "</tr>" +
                     "<tr>" +
-                        "<td>" + "Бизнес идеи: " + reports[i].BusinesIdeasCount + "</td>" +
+                    "<td>" + "Бизнес идеи: " + reports.Reports[i].BusinesIdeasCount + "</td>" +
                     "</tr>" +
                     "<tr>" +
-                        "<td>" + "Расходы за день: " + reports[i].ExpensesCount + "</td>" +
+                    "<td>" + "Расходы за день: " + reports.Reports[i].ExpensesCount + "</td>" +
                     "</tr>" +
 
-                "</table>"
+                    "</table>"
             );
         });
     }
@@ -64,7 +103,8 @@
             url: addReportUrl,
             data: { dateTimeNow: today },
             success: function (data, textStatus, jqXHR) {
-                showReports(data);
+                //showReports(data);
+                showReportWithUnderscoreJS(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
@@ -81,7 +121,8 @@
             url: getReportsUrl,
             data: {},
             success: function (data, textStatus, jqXHR) {
-                showReports(data);
+                //showReports(data);
+                showReportWithUnderscoreJS(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
