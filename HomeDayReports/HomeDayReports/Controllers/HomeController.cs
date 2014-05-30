@@ -65,7 +65,7 @@ namespace HomeDayReports.Controllers
             {
 
                 var tempReports = db.DayReports
-                            .OrderBy(r => r.ReportDate)
+                            .OrderByDescending(r => r.ReportDate)
                             .Select(r => new DayReportAjaxDto
                             {
                                 DayReport = r,
@@ -81,6 +81,31 @@ namespace HomeDayReports.Controllers
                 string jsonString = JsonConvert.SerializeObject(reports);
                 return Json(jsonString);
             }
+        }
+
+        public ActionResult CreateEvents(int id)
+        {
+            return View();
+        }
+
+        public ActionResult CreateIdeas(int id)
+        {
+            return View();
+        }
+
+        public ActionResult CreateDoneTasks(int id)
+        {
+            return View();
+        }
+
+        public ActionResult CreateBusinesIdeas(int id)
+        {
+            return View();
+        }
+
+        public ActionResult CreateExpenses(int id)
+        {
+            return View();
         }
 
         public ActionResult About()

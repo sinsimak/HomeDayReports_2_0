@@ -14,27 +14,41 @@
         <table class='table table-striped'>
             <tr>
                 <th>Отчёт за: <%= getGoodFormatDate(report.DayReport.ReportDate) %></th>
+                <th></th>
             </tr>
             <tr>
                 <td>
                     Анализ событий дня: <%= report.EventsCount %> 
-                    <button id="addDayReportButtonId" class="btn btn-mini btn-primary yes-button">Да!</button>
+                </td>
+                <td>
+                    <a class="btn btn-mini btn-primary" href=/Home/CreateEvents/<%=report.DayReport.Id %> >редактировать</a>
                 </td>
             </tr>
             <tr>
                 <td>
                     Ключевый мысли дня: <%= report.IdeasCount %>
-                    @Html.ActionLink("кнопка", "Index", "Home")
+                </td>
+                <td>
+                    <a class="btn btn-mini btn-primary" href=/Home/CreateIdeas/<%=report.DayReport.Id %> >редактировать</a>
                 </td>
             </tr>
             <tr>
                 <td>Решённые задачи: <%= report.DoneTasksCount %></td>
+                <td>
+                    <a class="btn btn-mini btn-primary" href=/Home/CreateDoneTasks/<%=report.DayReport.Id %> >редактировать</a>
+                </td>
             </tr>
             <tr>
                 <td>Бизнес идеи: <%= report.BusinesIdeasCount %></td>
+                <td>
+                    <a class="btn btn-mini btn-primary" href=/Home/CreateBusinesIdeas/<%=report.DayReport.Id %> >редактировать</a>
+                </td>
             </tr>
             <tr>
                 <td>Расходы за день: <%= report.ExpensesCount %></td>
+                <td>
+                    <a class="btn btn-mini btn-primary" href=/Home/CreateExpenses/<%=report.DayReport.Id %> >редактировать</a>
+                </td>
             </tr>
         </table>
     <% }); %>

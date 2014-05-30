@@ -216,6 +216,12 @@
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Home\CreateEvent.cshtml" />
+    <Content Include="Views\Home\CreateIdeas.cshtml" />
+    <Content Include="Views\Home\CreateDoneTasks.cshtml" />
+    <Content Include="Views\Home\CreateBusinesIdeas.cshtml" />
+    <Content Include="Views\Home\CreateExpenses.cshtml" />
+    <Content Include="Views\Home\CreateEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
